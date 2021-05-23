@@ -1,6 +1,6 @@
 CC = g++
 CXXFLAGS = -Wall -O2
-OBJS = chap1.o
+OBJS = chap1_exam1.o
 
 %.o : %.cpp %.h
 		$(CC) $(CXXFLAGS) -c $<
