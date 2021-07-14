@@ -7,7 +7,7 @@ template <typename T>
 class dynamic_array
 {
 	T* data;
-	int n;
+	size_t n;
 
 public:
 	dynamic_array(int n) {
