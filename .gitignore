@@ -1,0 +1,9 @@
+# simple viewer
+*.log
+
+# build intermediate
+.o
+.d
+
+# build output
+test
