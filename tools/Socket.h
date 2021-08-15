@@ -10,6 +10,8 @@
 // in_port_t, in_addr_t 
 #include <netinet/in.h>
 #include <netdb.h>
+#include <string.h>
+#include <iostream>
 
 const int MAX_HOST_NAME = 200;
 const int MAX_CONNET_NUMS = 5;
@@ -38,7 +40,7 @@ class Socket {
 
 	private:
 		int _sock;
-		socktaddr_in _addr;
+		sockaddr_in _addr;
 };
 
 #endif  // __SOCKET_CLASS__

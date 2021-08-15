@@ -2,7 +2,7 @@ CXX= g++
 CXXFLAGS= -Wall -W -Werror -MMD -O2 -g  #-std=c++NO
 #LIBS
 
-OBJS= sockUtils.o
+OBJS= Socket.o sockUtils.o
 
 SRCS:= $(OBJS: .o=.cc)
 
@@ -21,11 +21,7 @@ clean:
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-
-
 -include $(DEPS)
-
-
 
 ######comment line#####
 #$(OBJS): $(SRCS)
