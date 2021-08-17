@@ -13,34 +13,41 @@
 #include <string.h>
 #include <iostream>
 
-const int MAX_HOST_NAME = 200;
-const int MAX_CONNET_NUMS = 5;
-const int MAX_RECV = 10;
+typedef enum _COMM_STATUS {
+	COMM_STATUS_FAILED = -1,
+	COMM_STATUS_SUCCESS = 0,
+} COMM_STATUS;
+
+#define DEBUG_FLAG 1
+
+const int g_max_backlog_size = 3;
 
 class Socket {
 	public:
 		Socket();
 		virtual ~Socket();
 
+		void printErr(std::string func, std::string msg) const;
+
 		// Server
-		bool create();  // create and setsocket
+		bool createSock();  // add sock opt?
 		bool bind(const int port);
-		bool listen() const;
-		bool accept (Socket&) const;
+		bool listen() const;  // not modify _sock and _addr in this func
+		bool accept(Socket&) const;
 
 		// Client
 		bool connect(const std::string host, const int port);
 		
 		// Data Comm
 		bool sendData(const std::string) const;
-		int recv(std::string&) const;
+		int recvData(std::string&) const;
 
 		void setNoneBlocking(const bool);
 		bool isSocketValid() const { return _sock != -1; }
 
 	private:
 		int _sock;
-		sockaddr_in _addr;
+		sockaddr_in _srv_addr, _cli_addr;
 };
 
 #endif  // __SOCKET_CLASS__

@@ -17,7 +17,6 @@ int main(int argc, char **argv) {
 	}
 
 	printf("%s %d \n", argv[1], argc);
-	sc.create();
 
 	return 0;
 }
