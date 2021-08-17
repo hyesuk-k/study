@@ -20,17 +20,29 @@ void Socket::printErr(std::string func, std::string msg) const {
 	} 
 }
 
-bool Socket::createSock() {
-	_sock = socket(AF_INET, SOCK_STREAM, 0);
-	if (!isSocketValid()) {
+int Socket::createSock() {
+	int sock = -1;
+
+	sock = socket(AF_INET, SOCK_STREAM, 0);
+	if (sock == -1) {
 		printErr(__func__, "Fail to get new socket");
-		return false;
+		return COMM_STATUS_FAILED;
 	}
 
 	int reuseAddr = 1;
 	if (COMM_STATUS_FAILED == 
-			setsockopt(_sock, SOL_SOCKET, SO_REUSEADDR, (const char*)&reuseAddr, sizeof(reuseAddr))) {
+			setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (const char*)&reuseAddr, sizeof(reuseAddr))) {
 		printErr(__func__, "Fail to setsockopt");
+		return COMM_STATUS_FAILED;
+	}
+
+	return sock;
+}
+
+bool Socket::setSock(const int sock) {
+	_sock = sock;
+	if (!isSocketValid()) {
+		printErr(__func__, "Invalid socket");
 		return false;
 	}
 
@@ -110,5 +122,30 @@ bool Socket::connect(const std::string host, const int port) {
 	}
 }
 
+int Socket::sendData(const std::string data) const {
+	int send_data_len = ::send(_sock, data.c_str(), data.size(), MSG_NOSIGNAL);
+	if (send_data_len == COMM_STATUS_FAILED) {
+		return COMM_STATUS_FAILED;
+	} else {
+		return send_data_len;
+	}
+}
 
+int Socket::recvData(std::string &data) const {
+	char buf[MAX_RECV_BUFF_LEN + 1];
+	memset(buf, 0, MAX_RECV_BUFF_LEN + 1);
+	data = "";
+
+	int recv_data_len = ::recv(_sock, buf, MAX_RECV_BUFF_LEN, 0);
+	if (recv_data_len == COMM_STATUS_FAILED) {
+		return COMM_STATUS_FAILED;
+	} else if (recv_data_len == 0) {
+		return recv_data_len;
+	} else {
+		data = buf;
+		return recv_data_len;
+	}
+}
+
+// void setNoneBlocking(const bool flag)
 

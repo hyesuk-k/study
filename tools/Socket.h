@@ -19,6 +19,7 @@ typedef enum _COMM_STATUS {
 } COMM_STATUS;
 
 #define DEBUG_FLAG 1
+#define MAX_RECV_BUFF_LEN 2048
 
 const int g_max_backlog_size = 3;
 
@@ -29,8 +30,10 @@ class Socket {
 
 		void printErr(std::string func, std::string msg) const;
 
+		int createSock();  // add sock opt?
+		bool setSock(const int sock);
+
 		// Server
-		bool createSock();  // add sock opt?
 		bool bind(const int port);
 		bool listen() const;  // not modify _sock and _addr in this func
 		bool accept(Socket&) const;
@@ -39,7 +42,7 @@ class Socket {
 		bool connect(const std::string host, const int port);
 		
 		// Data Comm
-		bool sendData(const std::string) const;
+		int sendData(const std::string) const;
 		int recvData(std::string&) const;
 
 		void setNoneBlocking(const bool);
