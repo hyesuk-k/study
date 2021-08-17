@@ -15,13 +15,18 @@
 
 typedef enum _COMM_STATUS {
 	COMM_STATUS_FAILED = -1,
-	COMM_STATUS_SUCCESS = 0,
+	COMM_STATUS_NO_SND_RCV_DATA = 0,
+	COMM_STATUS_SUCCESS_CONNECT = 0,
+	COMM_STATUS_SUCCESS = 1,
 } COMM_STATUS;
 
-#define DEBUG_FLAG 1
+#define DEBUG_FLAG_ON 1
+#define DEBUF_FLAG_OFF 0
+
+#define DEFAULT_SOCK_VALUE -1
 #define MAX_RECV_BUFF_LEN 2048
 
-const int g_max_backlog_size = 3;
+const int g_debug_flag = DEBUG_FLAG_ON;
 
 class Socket {
 	public:
@@ -51,6 +56,7 @@ class Socket {
 	private:
 		int _sock;
 		sockaddr_in _srv_addr, _cli_addr;
+    const int g_max_backlog_size;
 };
 
 #endif  // __SOCKET_CLASS__
