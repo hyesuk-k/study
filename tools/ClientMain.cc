@@ -8,13 +8,14 @@ int main(int argc, char *argv[]) {
 
 	if (argc > 1) {
 		port = atoi(argv[1]);
-		if ((port > 65535) || (port < 1024)) {
-		  throw std::out_of_range("port out of range (1025 ~ 65535)");
-    }
 	} else if (argc > 2) {
 		host.assign(argv[1], strlen(argv[1]));
 		port = atoi(argv[2]);
 	}
+
+  if ((port > 65535) || (port < 1024)) {
+    throw std::out_of_range("port out of range (1025 ~ 65535)");
+  }
 
 	printf("%s\n", argv[1]);
 	std::cout << host << ":" << port << std::endl;
