@@ -6,18 +6,25 @@ int main(int argc, char *argv[]) {
 	std::string host = "localhost";
 	int port = 29929;
 
-	if (argc > 1) {
+	if (argc == 2) {
 		port = atoi(argv[1]);
-	} else if (argc > 2) {
+	} else if (argc == 3) {
 		host.assign(argv[1], strlen(argv[1]));
 		port = atoi(argv[2]);
 	}
 
-  if ((port > 65535) || (port < 1024)) {
-    throw std::out_of_range("port out of range (1025 ~ 65535)");
+  ClientUtil c;
+
+  if (VALID_INFO != c.checkPort(port)) {
+    throw std::invalid_argument{
+      "port is out of range (1025 ~ 65535) : "};
   }
 
-	printf("%s\n", argv[1]);
+  if (VALID_INFO != c.checkIPv4(host)) {
+    throw std::invalid_argument(
+      "host is not [localhost] OR [IPv4] ");
+  }
+
 	std::cout << host << ":" << port << std::endl;
 
 	ClientUtil client(host, port);

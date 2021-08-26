@@ -36,3 +36,23 @@ int ClientUtil::recvFromServer(std::string &data) const {
 
 	return recv_data_len;
 }
+
+int ClientUtil::checkPort(const int port) const {
+  if ((port > 65535) || (port < 1024)) {
+    return INVALID_PORT;
+  }
+
+  return VALID_INFO;  
+}
+
+int ClientUtil::checkIPv4(const std::string &host) const {
+  std::string local = "localhost"; 
+  in_addr addr;
+
+  if ((host != local)
+      && (0 == inet_pton(AF_INET, host.c_str(), &addr.s_addr))) {
+    return INVALID_ADDR;
+  }
+
+  return VALID_INFO;
+}

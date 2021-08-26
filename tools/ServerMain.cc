@@ -4,7 +4,7 @@
 int main(int argc, char **argv) {
 	std::cout << "server running\n";
 
-	ServerUtil server(30000);
+	ServerUtil server(29929);
 
 	while (true) {
 		ServerUtil new_server;
