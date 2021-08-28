@@ -17,12 +17,12 @@ int main(int argc, char *argv[]) {
 
   if (VALID_INFO != c.checkPort(port)) {
     throw std::invalid_argument{
-      "port is out of range (1025 ~ 65535) : "};
+      "port is out of range (1025 ~ 65535) : " + std::to_string(port) };
   }
 
   if (VALID_INFO != c.checkIPv4(host)) {
-    throw std::invalid_argument(
-      "host is not [localhost] OR [IPv4] ");
+    throw std::invalid_argument{
+      "host is not [localhost] OR [IPv4] : " + host};
   }
 
 	std::cout << host << ":" << port << std::endl;
