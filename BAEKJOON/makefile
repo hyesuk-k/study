@@ -4,7 +4,7 @@
 # make clean VAR=<fileName>
 # make cleanall      				
 ############################# 
-VAR= "default"
+VAR= "test"
 
 CXX= g++
 CXXFLAGS= -Wall -W -Werror -MMD -O2 -g  #-std=c++NO
