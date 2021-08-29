@@ -2,9 +2,17 @@
 #include <string>
 
 int main(int argc, char **argv) {
-	std::cout << "server running\n";
+  int port = 29929;
 
-	ServerUtil server(29929);
+	if (argc == 2) {
+		port = atoi(argv[1]);
+	} else if (argc > 2) {
+    throw std::invalid_argument {
+      "server arguments is invalid (arg count is 1 or 2) : " + std::to_string(argc)};
+  }
+
+	ServerUtil server(port);
+	std::cout << "server running\n";
 
 	while (true) {
 		ServerUtil new_server;
