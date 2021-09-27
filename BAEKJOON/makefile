@@ -14,20 +14,24 @@ OBJS= $(VAR).o
 SRCS:= $(OBJS: .o=.cc)
 DEPS:= $(OBJS:.o=.d)
 
-TARGET= $(VAR)
+TARGET="test"
+
 
 .PHONY: all clean cleanall
 
-all: $(TARGET)
+all: $(VAR)
+
 
 clean:
 	rm -f $(TARGET) $(OBJS) $(DEPS)
+	rm -f *.o *.d
 
 cleanall:
 	find . -type f -executable -delete
 	rm -r *.o *.d 
 
-$(TARGET): $(OBJS)
+$(VAR): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
+	mv $(VAR) $(TARGET)
 
 -include $(DEPS)
