@@ -1,50 +1,48 @@
 #include <iostream>
 #include <string>
-#include <cstring>
+#include <vector>
 #include <algorithm>
-#include <cctype>
 
 using namespace std;
 
-int countChar(string w, string word) {
-  uint32_t pos = 0;
-  uint32_t idx = 0;
-  int count = 0;
-
-  while((idx = word.find(w, pos)) != string::npos) {
-    count++;
-    pos = idx + 1;
-  }
-
-  return count;
-}
+#define NUMBER_OF_ALPHA 26
 
 int main() {
   string word;
-  string mostFreqAlpha;
+  int alpha[NUMBER_OF_ALPHA] = {0, };
 
   cin >> word;
 
   transform(word.begin(), word.end(), word.begin(), ::toupper);
 
-  int max = 0;
-
   for (auto &w : word) {
-    string f = "";
-    f = w;
-    int ret = countChar(f, word);
+    int idx = w - 'A';
+    alpha[idx] += 1;
+  }
 
-    if ((max == ret)
-        && (mostFreqAlpha != f)) {
-      mostFreqAlpha = "?";
-    }
+  int maxNum = 0;
+  int maxAlpha = 0;
 
-    if (max < ret) {
-      max = ret;
-      mostFreqAlpha = f;
+  for (int i = 0 ; i < NUMBER_OF_ALPHA ; i++) {
+    if (maxNum < alpha[i]) {
+      maxNum = alpha[i];
+      maxAlpha = i;
     }
   }
-  cout << mostFreqAlpha << endl;
+
+  int dup = 0;
+  for (int i = 0 ; i < NUMBER_OF_ALPHA ; i++) {
+    if (maxNum == alpha[i]) {
+      dup++;
+    }
+  }
+
+  if (dup == 1) {
+    cout << (char)(maxAlpha + 'A') << endl;
+  } else {
+    cout << "?" << endl;
+  }
+
 
   return 0;
 }
