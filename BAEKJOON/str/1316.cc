@@ -24,6 +24,7 @@ int main() {
       } else {
         if (input[sIdx-1] != a) {
           isGWord = false;
+          break;
         }
       }
       sIdx++;
