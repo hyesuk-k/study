@@ -7,7 +7,9 @@
 VAR= "test"
 
 CXX= g++
-CXXFLAGS= -Wall -W -Werror -MMD -O2 -g  #-std=c++NO
+CXXFLAGS= -Wall -W  -MMD -O2 -g
+#CXXFLAGS= -Wall -W -Werror -MMD -O2 -g
+#CXXFLAGS= -Wall -W -MMD -O2 -g #-Werror -MMD -O2 -g  #-std=c++NO
 #LIBS
 
 OBJS= $(VAR).o
