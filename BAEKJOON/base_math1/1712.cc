@@ -9,18 +9,13 @@ int main() {
 
   cin >> a >> b >> c;
 
-  if ((c - b) < 0) {
+  int benefit = c - b;
+  if (benefit <= 0) {
     cout << "-1" << endl;
     return 0;
   }
 
-  while (1) {
-    if ((c * ret)
-        - (a + (b * ret)) > 0) {
-      break;
-    }
-    ret++;
-  }
+  ret += a / benefit;
 
   cout << ret << endl;
   return 0;
