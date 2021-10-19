@@ -4,7 +4,7 @@
 # make clean VAR=<fileName>
 # make cleanall      				
 ############################# 
-VAR= "test"
+VAR= $(shell ls -tr *.cc | tail -1 | awk -F '.' '{print $$1}')
 
 CXX= g++
 CXXFLAGS= -Wall -W  -MMD -O2 -g
@@ -18,11 +18,9 @@ DEPS:= $(OBJS:.o=.d)
 
 TARGET="test"
 
-
 .PHONY: all clean cleanall
 
 all: $(VAR)
-
 
 clean:
 	rm -f $(TARGET) $(OBJS) $(DEPS)
