@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
 using namespace std;
 int main() {
@@ -7,25 +8,15 @@ int main() {
 
   cin >> a >> b >> v;
 
-  double total = ceil(v/a);
-  double day = a * total;
-  double night = b * total;
+  // 하루에 올라갈 수 있는 길이
+  double dayRiseLen = a - b;
+  // 올라가야할 총 길이 - 하루 미끄러지는 길이
+  double totalRiseLen = v - b;
 
-  if ((day - night) >= v) {
-    cout << total << endl;
-    return 0;
-  }
+  double day = totalRiseLen / dayRiseLen;
 
-  while (true) {
-    total++;
-
-    day = a * total;
-    if ((day - night) >= v) {
-      cout << total << endl;
-      break;
-    }
-    night = b * total;
-  }
+  cout.precision(0);
+  cout << fixed << ceil(day) << endl;
  
   return 0;
 }
