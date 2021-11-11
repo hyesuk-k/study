@@ -16,6 +16,7 @@ int main () {
     int maxK = ceil(sqrt(distance));
     cout << maxK << endl;
   }
+
   return 0;
 }
 
@@ -57,4 +58,6 @@ int main () {
 
   maxK = ceil(sqrt(distance)); 
  
+  규칙 1. maxK는 sqrt(d) 이하.
+  규칙 2. sqrt(d)가 이전의 sqrt(d-1)과 다를 때, n이 +1이 됨
 */
