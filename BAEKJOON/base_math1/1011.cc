@@ -11,10 +11,17 @@ int main () {
   for (int i = 0 ; i < t ; i++) {
     cin >> x >> y;
 
-    int distance = y - x - 1;
+    int distance = y - x;
+    int sqrtD = (int)sqrt(distance);
+    int powSD = pow(sqrtD, 2);
 
-    int maxK = ceil(sqrt(distance));
-    cout << maxK << endl;
+    if (distance == powSD) {
+      cout << 2 * sqrtD -1 << "\n";
+    } else if ((powSD < distance) && (distance <= (powSD + sqrtD))) {
+      cout << 2 * sqrtD << "\n";
+    } else {
+      cout << 2 * sqrtD + 1 << "\n";
+    }
   }
 
   return 0;
@@ -60,4 +67,11 @@ int main () {
  
   규칙 1. maxK는 sqrt(d) 이하.
   규칙 2. sqrt(d)가 이전의 sqrt(d-1)과 다를 때, n이 +1이 됨
+
+  규칙 3. N은 d의 제곱에서 반반으로 나뉨.
+  1과 4 사이 (루트1과 루트2 사이에 반반으로 쪼개짐)
+  4와 9 사이 (루트4와 루트9는 각각 2와 3, 이 사이에 있는 D들인 5, 6, 7, 8이 각각 2개씩 나눠서 N이 결정됨 
+  -> 5,6은 N이 4, 7,8은 N이 5)
+
+
 */
